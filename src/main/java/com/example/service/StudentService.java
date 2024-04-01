@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.domain.Student;
 
+@Service
 public interface StudentService {
 
     List<Student> getAllStudents();
