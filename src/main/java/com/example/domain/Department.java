@@ -1,14 +1,12 @@
 package com.example.domain;
 
-import java.util.List;
+import com.example.dto.DepartmentDto;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,7 +15,7 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long depId;
     
     @Column(name = "department_name" )
     private String departmentName;
@@ -26,17 +24,39 @@ public class Department {
     private String description;
 
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    private List<Student> studentList;
+    public Department() {
+		super();
+		
+	}
+	
+
+	public Department(Long depId, String departmentName, String description) {
+		super();
+		this.depId = depId;
+		this.departmentName = departmentName;
+        this.description = description;
+	}
 
 
-    public Long getId() {
-        return id;
+    public Department(DepartmentDto depDto) {
+		super();
+		this.depId = depDto.getDepartmentId();
+		this.departmentName = depDto.getDepartmentName();
+	}
+
+    @Override
+    public String toString() {
+        return "Department [id=" + depId + ", departmentName=" + departmentName + ", description=" + description + "]";
     }
 
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getDepId() {
+        return depId;
+    }
+
+
+    public void setDepId(Long depId) {
+        this.depId = depId;
     }
 
 
@@ -60,6 +80,8 @@ public class Department {
     }
 
     
+
+
 
 
 }

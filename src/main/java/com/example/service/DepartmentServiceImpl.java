@@ -2,38 +2,26 @@ package com.example.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.domain.Department;
+import com.example.dto.DepartmentDto;
 import com.example.repository.DepartmentRepository;
 
-public class DepartmentServiceImpl {
+public class DepartmentServiceImpl implements DepartmentService{
 
+     @Autowired
      private DepartmentRepository departmentRepository;
 
-
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
-		super();
-		this.departmentRepository = departmentRepository;
+	@Override
+	public Department saveDepartment(DepartmentDto depDto) {
+		Department dep = new Department(depDto);
+		return departmentRepository.save(dep);
 	}
-
-    public List<Department> getAllDepartments() {
-        return departmentRepository.findAll();
-        
-    }
-
-    public Department saveDepartment(Department department) {
-        return departmentRepository.save(department);
-    }
-
-    public Department getDepartmentById(Long id) {
-        return departmentRepository.getReferenceById(id);
-    }
-
-    public Department updateDepartment(Department department) {
-		return departmentRepository.save(department);
+	@Override
+	public List<Department> getAllDepartments() {
+		
+		return departmentRepository.findAll();
 	}
-
-    public void deleteDepartmentById(Long id) {
-        departmentRepository.deleteById(id);
-    }
 
 }

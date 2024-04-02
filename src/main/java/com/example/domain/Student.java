@@ -2,6 +2,8 @@ package com.example.domain;
 
 import org.springframework.data.annotation.Id;
 
+import com.example.dto.StudentDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,34 +11,46 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
-@Table(name = "students")
+@Table(name = "Student")
 @Entity
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "emp_id")
+    private Long studentId;
 
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "department_Id")
+    private Department departmentId;
    
-    public Student(String firstName, String lastName) {
+
+    public Student() {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
+		
 	}
 
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    public Student(StudentDto studto) {
+		super();
+		this.studentId = studto.getStuId();
+		this.firstName = studto.getFirstName();
+		this.lastName = studto.getLastName();
+		this.departmentId = studto.getDepartmentId();
+	}
+
+    @JoinColumn(name = "department_id", referencedColumnName = "studentId")
     private Department department;
 
     public Long getId() {
-        return id;
+        return studentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public String getFirstName() {
@@ -63,6 +77,11 @@ public class Student {
         this.department = department;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Student [id=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", department="
+                + department + "]";
+    }
+
 
 }
