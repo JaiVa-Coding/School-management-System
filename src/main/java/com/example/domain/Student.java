@@ -29,7 +29,7 @@ public class Student {
     private Department departmentId;
    
 
-    public Student() {
+    public Student(long l, String string, String string2, Department department2) {
 		super();
 		
 	}

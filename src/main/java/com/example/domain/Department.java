@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "departments")
+@Table(name = "Department")
 public class Department {
 
     @Id
@@ -24,7 +24,7 @@ public class Department {
     private String description;
 
 
-    public Department() {
+    public Department(int i, String string) {
 		super();
 		
 	}
