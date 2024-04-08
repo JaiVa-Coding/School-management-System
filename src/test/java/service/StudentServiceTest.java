@@ -13,7 +13,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.example.domain.Department;
 import com.example.domain.Student;
-import com.example.dto.StudentDto;
 import com.example.repository.StudentRepository;
 import com.example.service.StudentService;
 
@@ -37,7 +36,7 @@ public class StudentServiceTest {
 	public void getEmployeeById_Success() {
 		String stuFirstName = "chaitanya";
         String stuLastName = "reddy";
-		StudentDto stu = stuService.findEmployeeById(300l);
+		Student stu = stuService.getStudentById(300l);
 		assertEquals(stuFirstName,stu.getFirstName());
         assertEquals(stuLastName,stu.getLastName());
 
