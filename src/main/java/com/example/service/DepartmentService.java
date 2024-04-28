@@ -5,18 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Department;
+import com.example.dto.DepartmentDto;
 
 @Service
 public interface DepartmentService {
+	Department saveDepartment(DepartmentDto dep);
 
-     List<Department> getAllDepartments();
-	
-	Department saveDepartment(Department department);
-	
-	Department getDepartmentById(Long id);
-	
-	Department updateDepartment(Department department);
-	
-	void deleteDepartmentById(Long id);
+	List<Department> getAllDepartments();
 
 }

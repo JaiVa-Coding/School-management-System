@@ -2,40 +2,37 @@ package com.example.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.domain.Student;
+import com.example.dto.StudentDto;
 import com.example.repository.StudentRepository;
 
 
-public class StudentServiceImpl {
+public class StudentServiceImpl implements StudentService{
 
+    @Autowired
     private StudentRepository studentRepository;
 
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
-		super();
-		this.studentRepository = studentRepository;
+	@Override
+	public Student getStudentById(Long studentId) {
+		
+		return studentRepository.findById(studentId).get();
 	}
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-        
-    }
-
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
-    }
-
-    public Student getStudentById(Long id) {
-        return studentRepository.getReferenceById(id);
-    }
-
-    public Student updateStudent(Student student) {
-		return studentRepository.save(student);
+	@Override
+	public List<Student> getAllStudents() {
+		
+		return studentRepository.findAll();
 	}
 
-    public void deleteStudentById(Long id) {
-        studentRepository.deleteById(id);
+    @Override
+    public Student saveStudent(StudentDto studto) {
+    	Student stu = new Student(studto);
+		return studentRepository.save(stu);
     }
+
 
 
 }
